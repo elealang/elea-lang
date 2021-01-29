@@ -1,15 +1,18 @@
 
 module CLI.Command 
-  ( Command 
+  ( Command  (..)
   , commandParser
+  , Build.build
   ) where
 
 
 import Options.Applicative 
 
 
-import qualified CLI.Command.Compile as Compile
-  ( Command, parser, parserInfo
+import qualified CLI.Command.Build as Build
+  ( Command
+  , parser, parserInfo
+  , build
   )
 import qualified CLI.Command.Run as Run
   ( Command, parser, parserInfo
@@ -18,7 +21,7 @@ import qualified CLI.Command.Run as Run
 
 
 data Command = 
-    Compile Compile.Command
+    Compile Build.Command
   | Run Run.Command
   deriving (Eq, Show)
 
@@ -26,7 +29,7 @@ data Command =
 -- | Command Parser
 commandParser :: Parser Command
 commandParser = hsubparser ( 
-     command "build" (info (Compile <$> Compile.parser) Compile.parserInfo)
+     command "build" (info (Compile <$> Build.parser) Build.parserInfo)
   <> command "run" (info (Run <$> Run.parser) Run.parserInfo)
   )
   where

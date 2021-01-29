@@ -1,4 +1,6 @@
 
+{-# OPTIONS_GHC -F -pgmF=record-dot-preprocessor #-}
+
 module CLI
   ( run 
   ) where
@@ -7,7 +9,13 @@ module CLI
 import Options.Applicative 
 
 
-import CLI.Command (Command, commandParser)
+import CLI.Command
+  ( Command (..)
+  , commandParser
+  )
+import qualified CLI.Command as C
+  ( build
+  )
 
 
 
@@ -18,10 +26,11 @@ run = execParser opts >>= runCommand
   opts =
     info (helper <*> commandParser) (
          fullDesc
-      <> progDesc "Parse and display Lulo specifications."
-      <> header "Lulo" )
+      <> progDesc "Command Line Interface for the Elea Programming Language"
+      <> header "Elea" )
 
 
 runCommand :: Command -> IO ()
-runCommand _ = return ()
+runCommand (Compile cmd) = C.build cmd
+    
 

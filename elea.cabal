@@ -16,10 +16,13 @@ maintainer:          jeff.scott.wise@gmail.com
 extra-source-files:  CHANGELOG.md, README.md
 
 library
-  exposed-modules:     MyLib
+  exposed-modules:     	GenApp.Golang
   -- other-modules:
   -- other-extensions:
-  build-depends:       base ^>=4.13.0.0
+  build-depends:       	base ^>=4.13.0.0,
+			record-hasfield,
+			text
+
 
   -- Directories containing source files.
   hs-source-dirs:      src
@@ -33,12 +36,13 @@ executable elea
 
   other-modules:       	CLI
 			CLI.Command
-			CLI.Command.Compile
+			CLI.Command.Build
 			CLI.Command.Run
 
   -- other-extensions:
   build-depends:      	base ^>=4.13.0.0,
 			elea,
+			mtl,
 			optparse-applicative,
 			record-hasfield,
 			text

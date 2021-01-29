@@ -37,3 +37,7 @@ example apps
 - blog ?
 - etl
 
+
+
+
+elea build db --types types.proto --lang golang --output-dir in/this/dir 
